@@ -85,7 +85,7 @@ pub fn resolve_root_wz_file_dir_full(
 
                 if node_write.parse(&root_node).is_ok() {
                     root_node_write.children.reserve(node_write.children.len());
-                    for (name, child) in node_write.children.drain() {
+                    for (name, child) in node_write.children.drain(..) {
                         root_node_write.children.insert(name, child);
                     }
                 }

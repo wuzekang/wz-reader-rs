@@ -1,4 +1,4 @@
-use hashbrown::Equivalent;
+use indexmap::Equivalent;
 use std::fmt::Display;
 use std::ops::Deref;
 use std::sync::Arc;

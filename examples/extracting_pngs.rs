@@ -21,7 +21,9 @@ fn main() {
             /* the name of image is easily got conflect */
             let save_name = node_read.get_full_path().replace("/", "-");
             /* resolving image will auto resolve image from _inlink and _outlink */
-            image.save(format!("{out}/{save_name}.png")).unwrap();
+            image
+                .save(format!("{}/{save_name}.png", out.to_string_lossy()))
+                .unwrap();
         }
     };
     match method.as_encoded_bytes() {

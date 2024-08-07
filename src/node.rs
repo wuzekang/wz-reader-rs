@@ -2,7 +2,7 @@ use crate::{
     directory, file, property, util::node_util, version, wz_image, SharedWzMutableKey, WzFile,
     WzImage, WzNodeCast, WzNodeName, WzObjectType,
 };
-use hashbrown::HashMap;
+use indexmap::IndexMap as HashMap;
 use std::path::Path;
 use std::sync::{Arc, RwLock, Weak};
 
@@ -485,7 +485,7 @@ impl WzNode {
     pub fn transfer_childs(&mut self, to: &WzNodeArc) {
         let mut write = to.write().unwrap();
         write.children.reserve(self.children.len());
-        for (name, child) in self.children.drain() {
+        for (name, child) in self.children.drain(..) {
             if let Some(old) = write.children.get(&name) {
                 child.write().unwrap().transfer_childs(old);
             } else {
@@ -552,7 +552,7 @@ impl WzNode {
 #[cfg(feature = "serde")]
 mod arc_node_serde {
     use crate::WzNodeName;
-    use hashbrown::HashMap;
+    use indexmap::IndexMap as HashMap;
     use serde::de::Deserializer;
     use serde::ser::{SerializeMap, Serializer};
     use serde::{Deserialize, Serialize};

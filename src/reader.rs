@@ -554,7 +554,7 @@ impl<T: AsRef<[u8]>> Reader for WzBaseReader<T> {
     }
 }
 
-impl<'a> Reader for WzSliceReader<'a> {
+impl Reader for WzSliceReader<'_> {
     fn get_size(&self) -> usize {
         self.buf.len()
     }

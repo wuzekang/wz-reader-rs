@@ -12,7 +12,7 @@ fn main() {
     let base_path = args.get(1).expect("missing base path");
     let item_name = args.get(2).expect("missing target name");
     let item_name = item_name.to_str().expect("invalid item name");
-    let base_node = resolve_base(&base_path, None).unwrap();
+    let base_node = resolve_base(base_path, None).unwrap();
 
     let start = std::time::Instant::now();
 
@@ -20,33 +20,24 @@ fn main() {
         let mut nodes = vec![];
         let base_node = base_node.read().unwrap();
 
-        base_node
-            .at_path("String/Cash.img")
-            .map(|node| nodes.push(node));
-        base_node
-            .at_path("String/Consume.img")
-            .map(|node| nodes.push(node));
-        base_node
-            .at_path("String/Eqp.img")
-            .map(|node| nodes.push(node));
-        base_node
-            .at_path("String/Map.img")
-            .map(|node| nodes.push(node));
-        base_node
-            .at_path("String/Mob.img")
-            .map(|node| nodes.push(node));
-        base_node
-            .at_path("String/Npc.img")
-            .map(|node| nodes.push(node));
-        base_node
-            .at_path("String/Pet.img")
-            .map(|node| nodes.push(node));
-        base_node
-            .at_path("String/Skill.img")
-            .map(|node| nodes.push(node));
-        base_node
-            .at_path("String/Ins.img")
-            .map(|node| nodes.push(node));
+        if let Some(node) = base_node
+            .at_path("String/Cash.img") { nodes.push(node) }
+        if let Some(node) = base_node
+            .at_path("String/Consume.img") { nodes.push(node) }
+        if let Some(node) = base_node
+            .at_path("String/Eqp.img") { nodes.push(node) }
+        if let Some(node) = base_node
+            .at_path("String/Map.img") { nodes.push(node) }
+        if let Some(node) = base_node
+            .at_path("String/Mob.img") { nodes.push(node) }
+        if let Some(node) = base_node
+            .at_path("String/Npc.img") { nodes.push(node) }
+        if let Some(node) = base_node
+            .at_path("String/Pet.img") { nodes.push(node) }
+        if let Some(node) = base_node
+            .at_path("String/Skill.img") { nodes.push(node) }
+        if let Some(node) = base_node
+            .at_path("String/Ins.img") { nodes.push(node) }
 
         nodes
     };
@@ -71,7 +62,7 @@ fn main() {
                         let node_read = node.read().unwrap();
                         /* name are always string node */
                         if node_read.try_as_string().is_some() {
-                            let name = string::resolve_string_from_node(&node);
+                            let name = string::resolve_string_from_node(node);
                             if let Ok(name) = name {
                                 if &name == item_name {
                                     let mut result = result.lock().unwrap();

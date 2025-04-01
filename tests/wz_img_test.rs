@@ -80,7 +80,7 @@ fn should_error_with_wrong_iv() -> Result<()> {
 }
 
 fn check_sample_wz_img(wz_img: &WzNodeArc) -> Result<()> {
-    assert!(node_util::parse_node(&wz_img).is_ok());
+    assert!(node_util::parse_node(wz_img).is_ok());
 
     let wz_img_read = wz_img.read().unwrap();
 

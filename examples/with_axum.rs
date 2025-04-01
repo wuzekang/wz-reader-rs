@@ -133,7 +133,7 @@ async fn init_wz_root(
     let mut wz_root = wz_root.write().unwrap();
     *wz_root = Some(base_node);
 
-    return Ok(StatusCode::OK);
+    Ok(StatusCode::OK)
 }
 
 #[derive(Debug)]
@@ -196,9 +196,9 @@ fn get_node_from_root(
     let wz_root = wz_root.read().unwrap();
 
     let target = if force_parse {
-        wz_root.at_path_parsed(&path)?
+        wz_root.at_path_parsed(path)?
     } else {
-        wz_root.at_path(&path).ok_or(node::Error::NodeNotFound)?
+        wz_root.at_path(path).ok_or(node::Error::NodeNotFound)?
     };
 
     if force_parse {
@@ -255,7 +255,7 @@ async fn get_image(
 
     let target_read = target.read().unwrap();
 
-    if let Some(_) = target_read.try_as_png() {
+    if target_read.try_as_png().is_some() {
         let img = property::get_image(&target).map_err(|_| NodeFindError::ServerError)?;
 
         let mut buf = BufWriter::new(Cursor::new(Vec::new()));
@@ -273,7 +273,7 @@ async fn get_image(
             .map_err(|_| NodeFindError::ServerError);
     }
 
-    return Err(NodeFindError::TypeMismatch);
+    Err(NodeFindError::TypeMismatch)
 }
 
 /* grabe image urls part */
@@ -291,7 +291,7 @@ async fn get_image_urls(
 
     walk_node(&target, force_parse, &|node| {
         let node_read = node.read().unwrap();
-        if let Some(_) = node_read.try_as_png() {
+        if node_read.try_as_png().is_some() {
             let path = node_read.get_full_path().replace("Base/", "");
             let mut urls = urls.lock().unwrap();
             urls.push(path);
@@ -337,7 +337,7 @@ async fn get_sound(
             .map_err(|_| NodeFindError::ServerError);
     }
 
-    return Err(NodeFindError::TypeMismatch);
+    Err(NodeFindError::TypeMismatch)
 }
 
 /* browse part */
@@ -363,7 +363,7 @@ fn make_simple_browse_node_link(
     }
 
     if !url.is_empty() {
-        url.insert_str(0, "/");
+        url.insert(0, '/');
     }
     if force_parse {
         url.push_str("?force_parse=true");

@@ -11,7 +11,7 @@ fn main() {
     let args = std::env::args().collect::<Vec<_>>();
     let base_path = args.get(1).expect("missing base path");
     let target_pet_id = args.get(2).expect("missing target pet id");
-    let base_node = resolve_base(&base_path, None).unwrap();
+    let base_node = resolve_base(base_path, None).unwrap();
 
     let start = std::time::Instant::now();
 
@@ -72,7 +72,7 @@ fn main() {
             let pet_equip_node = pet_equip_node.read().unwrap();
             let pet_equip_item = pet_equip_node
                 .at(id)
-                .expect(format!("pet equip item {} not found", id).as_str());
+                .unwrap_or_else(|| panic!("pet equip item {} not found", id));
             let pet_equip_item = pet_equip_item.read().unwrap();
             let name = pet_equip_item.at("name").expect("name not found");
             string::resolve_string_from_node(&name)

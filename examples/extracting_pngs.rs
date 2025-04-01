@@ -17,7 +17,7 @@ fn main() {
     let save_image_fn = |node: &WzNodeArc| {
         let node_read = node.read().unwrap();
         if node_read.try_as_png().is_some() {
-            let image = get_image(&node).unwrap();
+            let image = get_image(node).unwrap();
             /* the name of image is easily got conflect */
             let save_name = node_read.get_full_path().replace("/", "-");
             /* resolving image will auto resolve image from _inlink and _outlink */

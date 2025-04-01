@@ -114,7 +114,7 @@ mod test {
 
         let encrypted = generate_encrypted_text(lua_text, iv);
 
-        (&mut map[..len]).copy_from_slice(&encrypted);
+        map[..len].copy_from_slice(&encrypted);
 
         let reader = Arc::new(WzReader::new(map.make_read_only()?).with_iv(iv));
 

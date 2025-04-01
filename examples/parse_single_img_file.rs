@@ -17,7 +17,7 @@ fn main() {
     walk_node(&node, true, &|node: &WzNodeArc| {
         let node_read = node.read().unwrap();
         if node_read.try_as_png().is_some() {
-            let image = get_image(&node).unwrap().into_rgba8();
+            let image = get_image(node).unwrap().into_rgba8();
             let save_name = [&node_read.get_full_path().replace("/", "-"), ".png"].concat();
             let out_path = out_dir.join(save_name);
             image.save(out_path).unwrap();

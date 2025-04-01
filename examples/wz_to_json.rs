@@ -13,7 +13,7 @@ fn walk_node_and_to_json(node_arc: &WzNodeArc, json: &mut Map<String, Value>) {
         | WzObjectType::File(_)
         | WzObjectType::Property(_) => {
             let mut child_json = Map::new();
-            if node.children.len() != 0 {
+            if !node.children.is_empty() {
                 for value in node.children.values() {
                     walk_node_and_to_json(value, &mut child_json);
                 }

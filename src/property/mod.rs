@@ -117,8 +117,8 @@ mod test {
     #[cfg(feature = "serde")]
     #[test]
     fn test_serialize_wz_sub_property() {
-        let png = WzSubProperty::PNG(Box::new(WzPng::default()));
-        let sound = WzSubProperty::Sound(Box::new(WzSound::default()));
+        let png = WzSubProperty::PNG(Box::default());
+        let sound = WzSubProperty::Sound(Box::default());
         let property = WzSubProperty::Property;
         let convex = WzSubProperty::Convex;
 

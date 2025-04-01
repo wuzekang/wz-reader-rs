@@ -199,7 +199,7 @@ impl<'de> Deserialize<'de> for WzString {
     {
         use std::fmt;
         struct StringVisitor;
-        impl<'de> Visitor<'de> for StringVisitor {
+        impl Visitor<'_> for StringVisitor {
             type Value = WzString;
 
             fn expecting(&self, formatter: &mut fmt::Formatter) -> fmt::Result {

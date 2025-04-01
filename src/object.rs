@@ -83,7 +83,7 @@ mod test {
     use super::*;
 
     #[cfg(feature = "serde")]
-    use serde_json;
+    
 
     #[cfg(feature = "serde")]
     #[test]

@@ -11,7 +11,7 @@ fn main() {
     let args = std::env::args().collect::<Vec<_>>();
     let base_path = args.get(1).expect("missing base path");
     let out_path = args.get(2).expect("missing target name");
-    let base_node = resolve_base(&base_path, Some(WzMapleVersion::BMS)).unwrap();
+    let base_node = resolve_base(base_path, Some(WzMapleVersion::BMS)).unwrap();
 
     let start = std::time::Instant::now();
 

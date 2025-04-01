@@ -143,7 +143,7 @@ fn direct_access_bench(c: &mut Criterion) {
     let image_node = image_node.try_as_image().unwrap();
     c.bench_function("direct access lookup", |b| {
         b.iter(|| {
-            direct_lookup(black_box(&image_node), "1/1/1/1/1/1/1/1/1/1/1");
+            direct_lookup(black_box(image_node), "1/1/1/1/1/1/1/1/1/1/1");
         })
     });
 }
